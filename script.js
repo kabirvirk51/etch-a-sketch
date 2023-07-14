@@ -12,3 +12,22 @@ for (let i = 0; i < 256; i++) {
 for (let i = 0; i < 256; i++) {
   container.appendChild(divs[i]);
 }
+
+let isColor = false;
+
+for (let i = 0; i < 256; i++) {
+  divs[i].addEventListener("mouseenter", () => {
+    if (isColor == true) {
+      divs[i].style.backgroundColor = "black";
+    }
+  });
+
+  divs[i].addEventListener("mousedown", () => {
+    isColor = true;
+    divs[i].style.backgroundColor = "black";
+  });
+
+  divs[i].addEventListener("mouseup", () => {
+    isColor = false;
+  });
+}
