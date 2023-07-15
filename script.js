@@ -31,3 +31,19 @@ for (let i = 0; i < 256; i++) {
     isColor = false;
   });
 }
+
+const outerContainer = document.querySelector("#outer-container");
+
+let clear = document.createElement("button");
+
+clear.classList.add("clear");
+
+clear.textContent = "Clear";
+
+outerContainer.appendChild(clear);
+
+clear.addEventListener("click", () => {
+  for (let i = 0; i < 256; i++) {
+    divs[i].style.backgroundColor = "white";
+  }
+});
