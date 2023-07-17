@@ -32,7 +32,20 @@ for (let i = 0; i < 256; i++) {
   });
 }
 
-const outerContainer = document.querySelector("#outer-container");
+const sizeSlider = document.getElementById("sizeSlider");
+const sizeSliderText = document.getElementById("sizeSliderText");
+
+for (let i = 0; i < 100; i++) {
+  if (sizeSlider.value == i) {
+    sizeSlider.addEventListener("input", () => {
+      sizeSliderText.textContent = sizeSlider.value + " x " + sizeSlider.value;
+    });
+  } else {
+    continue;
+  }
+}
+
+const clearContainer = document.querySelector("#outer-container");
 
 let clear = document.createElement("button");
 
@@ -40,7 +53,7 @@ clear.classList.add("clear");
 
 clear.textContent = "Clear";
 
-outerContainer.appendChild(clear);
+clearContainer.appendChild(clear);
 
 clear.addEventListener("click", () => {
   for (let i = 0; i < 256; i++) {

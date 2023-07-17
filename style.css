@@ -69,3 +69,34 @@ body {
 
 
 }
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 10px;
+    background-color: #ccc;
+    outline: none;
+    border-radius: 5px;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: lightblue;
+}
+
+#sizeSliderText {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
