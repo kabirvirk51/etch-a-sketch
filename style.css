@@ -30,16 +30,20 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 2px solid black;
     width: 500px;
     height: 500px;
+    max-width: 500px;
+    max-height: 500px;
     background-color: white;
     margin-bottom: 20px;
+
 }
 
 .squares {
     width: calc(100% / 16);
     height: calc(100% / 16);
+    box-sizing: border-box;
+    border: 0.05px solid wheat;
 }
 
 #footer {
