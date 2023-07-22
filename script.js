@@ -1,5 +1,5 @@
 const container = document.querySelector("#container");
-const clearContainer = document.querySelector("#outer-container");
+const clearRGBButtons = document.querySelector("#outer-container");
 const sizeSlider = document.getElementById("sizeSlider");
 const sizeSliderText = document.getElementById("sizeSliderText");
 
@@ -8,23 +8,33 @@ let gridDivs;
 let tempDivs;
 let sizeSliderValue = 16;
 let isColor = false;
+let currentMode = "black";
 
 adjustSquareSizes();
-setupEventListeners();
+setupEventListenersBlack();
 
 sizeSlider.addEventListener("input", () => {
   sizeSliderValue = sizeSlider.value;
   sizeSliderText.textContent = sizeSlider.value + " x " + sizeSlider.value;
+
+  const tempMode = currentMode;
+
   for (let i = 0; i < tempDivs; i++) {
     divs[i].style.backgroundColor = "white";
   }
   adjustSquareSizes();
-  setupEventListeners();
+
+  currentMode = tempMode;
+  if (currentMode === "black") {
+    setupEventListenersBlack();
+  } else if (currentMode === "RGB") {
+    setupEventListenersRGB();
+  }
 });
 
 function adjustSquareSizes() {
   tempDivs = sizeSliderValue * sizeSliderValue;
-  divs = []; // Clear the existing divs array
+  divs = [];
 
   for (let i = 0; i < tempDivs; i++) {
     gridDivs = document.createElement("div");
@@ -32,7 +42,7 @@ function adjustSquareSizes() {
     divs.push(gridDivs);
   }
 
-  container.innerHTML = ""; // Clear the existing content
+  container.innerHTML = "";
   for (let i = 0; i < tempDivs; i++) {
     divs[i].style.width = `calc(100% / ${sizeSliderValue})`;
     divs[i].style.height = `calc(100% / ${sizeSliderValue})`;
@@ -41,7 +51,7 @@ function adjustSquareSizes() {
   container.style.cssText = "overflow:hidden";
 }
 
-function setupEventListeners() {
+function setupEventListenersBlack() {
   for (let i = 0; i < tempDivs; i++) {
     divs[i].addEventListener("mouseenter", () => {
       if (isColor == true) {
@@ -60,13 +70,53 @@ function setupEventListeners() {
   }
 }
 
+function setupEventListenersRGB() {
+  for (let i = 0; i < tempDivs; i++) {
+    divs[i].addEventListener("mouseenter", () => {
+      if (isColor == true) {
+        divs[i].style.backgroundColor = getRandomColor();
+      }
+    });
+
+    divs[i].addEventListener("mousedown", () => {
+      isColor = true;
+      divs[i].style.backgroundColor = getRandomColor();
+    });
+
+    divs[i].addEventListener("mouseup", () => {
+      isColor = false;
+    });
+  }
+}
+
 const clear = document.createElement("button");
 clear.classList.add("clear");
 clear.textContent = "Clear";
-clearContainer.appendChild(clear);
+clearRGBButtons.appendChild(clear);
 
 clear.addEventListener("click", () => {
+  currentMode = "black";
   for (let i = 0; i < tempDivs; i++) {
     divs[i].style.backgroundColor = "white";
   }
+  setupEventListenersBlack();
+});
+
+function getRandomColor() {
+  let letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+const RGB = document.createElement("button");
+RGB.classList.add("rgb");
+RGB.textContent = "RGB";
+clearRGBButtons.appendChild(RGB);
+
+RGB.addEventListener("click", () => {
+  currentMode = "RGB";
+  setupEventListenersRGB();
 });
