@@ -1,5 +1,5 @@
 const container = document.querySelector("#container");
-const clearRGBButtons = document.querySelector("#outer-container");
+const clearRGBButtons = document.querySelector("#outer-button-container");
 const sizeSlider = document.getElementById("sizeSlider");
 const sizeSliderText = document.getElementById("sizeSliderText");
 
